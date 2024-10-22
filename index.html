@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>My To-Do List</h2>
+        <input type="text" id="newTask" placeholder="Add a new task...">
+        <button onclick="addTask()">Add</button>
+
+        <div class="task-container">
+            <ul id="taskList">
+            </ul>
+        </div>
+
+        <label for="bgColor">Change Background Color:</label>
+        <select id="bgColor" onchange="changeBackgroundColor(this.value)">
+            <option value="">Select Color</option>
+            <option value="lightblue">Light Blue</option>
+            <option value="lightgreen">Light Green</option>
+            <option value="lightyellow">Light Yellow</option>
+        </select>
+
+        <label for="fontSize">Change Font Size:</label>
+        <input type="range" id="fontSize" min="10" max="30" value="16" onchange="changeFontSize(this.value)">
+
+        <label for="fontStyle">Change Font Style:</label>
+        <select id="fontStyle" onchange="changeFontStyle(this.value)">
+            <option value="sans-serif">Sans-Serif</option>
+            <option value="serif">Serif</option>
+        </select>
+
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
