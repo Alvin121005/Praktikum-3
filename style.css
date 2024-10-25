@@ -1,86 +1,91 @@
 body {
     font-family: sans-serif;
     transition: background-color 0.3s, color 0.3s, font-size 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    background-color: white;
 }
 
 .container {
     width: 400px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: white;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+}
+
+.input-container {
+    display: flex;
+    margin-bottom: 10px;
 }
 
 input[type="text"] {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin-right: 5px;
     border: 1px solid #ddd;
+    border-radius: 4px;
     box-sizing: border-box;
+    transition: font-size 0.3s; /* Transisi untuk perubahan ukuran font */
 }
 
-.task-container {
-    background-color: #f9f9f9;
+button {
     padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.settings-container {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.background-container,
+.font-size-container,
+.font-style-container {
+    margin-bottom: 10px;
 }
 
 #taskList {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 #taskList li {
     padding: 10px;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
-    background-color: white;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
-    position: relative;
+    transition: background-color 0.3s, color 0.3s, font-size 0.3s; /* Transisi untuk item daftar */
 }
 
 .close {
     color: red;
     float: right;
     cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 10px;
 }
 
-.completed {
-    text-decoration: line-through;
-}
-
-.dark-mode {
-    background-color: #333;
-    color: white;
+.edit {
+    color: blue;
+    margin-left: 5px;
+    cursor: pointer;
 }
 
 .dark-mode .container {
-    background-color: #444;
-}
-
-.dark-mode .task-container {
-    background-color: #555;
-}
-
-.dark-mode #taskList li {
-    background-color: #666;
+    background-color: black;
     color: white;
 }
 
-.dark-mode .close {
-    color: lightcoral;
+.dark-mode {
+    background-color: black;
+    color: white;
 }

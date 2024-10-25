@@ -1,31 +1,42 @@
-let isDarkMode = false;
+let fontSize = 16;
 
 function addTask() {
-    const taskInput = document.getElementById('newTask');
-    const taskText = taskInput.value;
-    if (taskText === '') return;
+    const taskInput = document.getElementById("newTask");
+    const taskText = taskInput.value.trim();
 
-    const li = document.createElement('li');
-    li.textContent = taskText;
+    if (taskText.length > 30) {
+        alert("Hanya bisa mengisi maksimal 30 karakter!");
+        return;
+    }
 
-    const closeBtn = document.createElement('span');
-    closeBtn.textContent = ' X';
-    closeBtn.className = 'close';
-    closeBtn.onclick = function() {
-        deleteTask(li);
-    };
-    li.appendChild(closeBtn);
+    if (taskText) {
+        const li = document.createElement("li");
+        li.textContent = taskText;
 
-    li.ondblclick = function() {
-        editTask(li);
-    };
+        const closeBtn = document.createElement("span");
+        closeBtn.textContent = " X";
+        closeBtn.className = "close";
+        closeBtn.onclick = function() {
+            deleteTask(this.parentElement);
+        };
+        
+        const editBtn = document.createElement("span");
+        editBtn.textContent = "✎";
+        editBtn.className = "edit";
+        editBtn.onclick = function() {
+            editTask(this.parentElement);
+        };
 
-    li.onclick = function() {
-        markAsCompleted(li);
-    };
+        li.appendChild(editBtn);
+        li.appendChild(closeBtn);
+        
+        li.ondblclick = function() {
+            editTask(this);
+        };
 
-    document.getElementById('taskList').appendChild(li);
-    taskInput.value = ''; 
+        document.getElementById("taskList").appendChild(li);
+        taskInput.value = "";
+    }
 }
 
 function deleteTask(element) {
@@ -33,30 +44,65 @@ function deleteTask(element) {
 }
 
 function editTask(element) {
-    const currentText = element.childNodes[0].textContent;
-    const newTask = prompt("Edit Task:", currentText);
-    if (newTask) {
-        element.childNodes[0].textContent = newTask;
-    }
+    const currentText = element.childNodes[0].textContent.trim();
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = currentText;
+
+    input.onkeypress = function(event) {
+        if (event.key === "Enter") {
+            if (input.value.length > 30) {
+                alert("Hanya bisa mengisi maksimal 30 karakter!");
+                return;
+            }
+            const updatedText = input.value.trim();
+            if (updatedText) {
+                element.childNodes[0].textContent = updatedText; // Update text
+            }
+            // Remove the input and re-add edit and close buttons
+            element.innerHTML = ""; 
+            const editBtn = document.createElement("span");
+            editBtn.textContent = "✎";
+            editBtn.className = "edit";
+            editBtn.onclick = function() {
+                editTask(this.parentElement);
+            };
+            const closeBtn = document.createElement("span");
+            closeBtn.textContent = " X";
+            closeBtn.className = "close";
+            closeBtn.onclick = function() {
+                deleteTask(this.parentElement);
+            };
+            element.appendChild(document.createTextNode(updatedText));
+            element.appendChild(editBtn);
+            element.appendChild(closeBtn);
+        }
+    };
+
+    element.innerHTML = ""; 
+    element.appendChild(input);
+    input.focus(); 
 }
 
-function changeBackgroundColor(color) {
-    document.body.style.backgroundColor = color;
+function changeBackgroundColor() {
+    const bgColor = document.getElementById("bgColor").value;
+    document.body.style.backgroundColor = bgColor;
 }
 
 function changeFontSize(size) {
-    document.body.style.fontSize = size + 'px';
-}
-
-function changeFontStyle(style) {
-    document.body.style.fontFamily = style;
+    const body = document.body;
+    fontSize = size;
+    body.style.fontSize = fontSize + 'px';
+    document.getElementById("fontSizeValue").textContent = fontSize + 'px';
+    const container = document.querySelector('.container');
+    container.style.fontSize = fontSize + 'px';
 }
 
 function toggleDarkMode() {
-    isDarkMode = !isDarkMode;
-    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle("dark-mode");
 }
 
-function markAsCompleted(element) {
-    element.classList.toggle('completed');
+function changeFontStyle() {
+    const fontStyle = document.getElementById("fontStyle").value;
+    document.body.style.fontFamily = fontStyle;
 }
