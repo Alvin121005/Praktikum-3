@@ -1,91 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: sans-serif;
-    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
-    background-color: white;
+    font-family: 'Arial', sans-serif; /* Mengubah font utama */
+    background-color: #e0f7fa; /* Warna latar belakang baru */
+    color: #333; 
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background-color 0.3s, color 0.3s; 
 }
 
 .container {
-    width: 400px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    transition: background-color 0.3s, color 0.3s, font-size 0.3s;
+    background-color: #ffffff; /* Warna latar belakang kontainer */
+    border-radius: 15px;
+    padding: 40px;
+    width: 450px; /* Lebar kontainer baru */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); /* Bayangan baru */
 }
 
-.input-container {
-    display: flex;
-    margin-bottom: 10px;
+h1, h2 {
+    color: #333; /* Hitam saat dark mode off */
 }
 
-input[type="text"] {
-    width: 100%;
+.dark-theme h1, .dark-theme h2 {
+    color: #ffffff; /* Putih saat dark mode on */
+}
+
+.controls,
+.todo-container {
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.control-item {
+    margin-bottom: 15px; 
+}
+
+label {
+    display: block;
+}
+
+select,
+input[type='range'],
+button,
+input[type='text'] {
+    width: calc(100% - 20px);
+    margin-top: 10px;
     padding: 10px;
-    margin-right: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: font-size 0.3s; /* Transisi untuk perubahan ukuran font */
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+}
+
+input[type='text'] {
+    width: calc(100% - 22px);
 }
 
 button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #28a745;
-    color: white;
+    background-color: #4CAF50; /* Mengubah warna tombol menjadi hijau solid */
+    color: white; 
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #388E3C; /* Warna saat hover */
 }
 
-.settings-container {
-    margin-bottom: 20px;
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
     display: flex;
-    flex-direction: column;
-}
-
-.background-container,
-.font-size-container,
-.font-style-container {
-    margin-bottom: 10px;
-}
-
-#taskList {
-    list-style: none;
-    padding: 0;
-}
-
-#taskList li {
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, font-size 0.3s; /* Transisi untuk item daftar */
+    margin-top: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang item daftar */
 }
 
-.close {
-    color: red;
-    float: right;
-    cursor: pointer;
+.completed {
+    text-decoration: line-through; 
 }
 
-.edit {
-    color: blue;
-    margin-left: 5px;
-    cursor: pointer;
+.completed button {
+    color: #ff4d4d; 
 }
 
-.dark-mode .container {
-    background-color: black;
-    color: white;
+/* Dark Theme Styles */
+.dark-theme {
+    background-color: #15181f; 
+    color: #e5e5e5; 
 }
 
-.dark-mode {
-    background-color: black;
-    color: white;
+.dark-theme .container {
+    background-color: #2c2f33; 
+}
+
+/* Tombol tetap hijau saat dark mode on */
+.dark-theme button {
+    background-color: #4CAF50; 
+}
+
+/* Teks dalam daftar to-do menjadi putih saat dark mode on */
+.dark-theme li {
+    color: #ffffff; /* Teks putih untuk item daftar */
 }

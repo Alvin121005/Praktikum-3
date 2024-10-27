@@ -1,48 +1,56 @@
-<html lang="id">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do App</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Dynamic Page Appearance & My To-Do List</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h2>My To-Do List</h2>
-        
-        <div class="input-container">
-            <input type="text" id="newTask" placeholder="Add a new task..." maxlength="30">
-            <button onclick="addTask()">Add</button>
-            
-        </div>
-        
-        <div class="settings-container">
-            <div class="background-container">
+        <h1>Dynamic Page Appearance</h1>
+        <div class="controls">
+            <h2>Change Appearance</h2>
+            <div class="control-item">
                 <label for="bgColor">Background Color:</label>
-                <select id="bgColor" onchange="changeBackgroundColor()">
-                    <option value="white">White</option>
-                    <option value="lightblue">Light Blue</option>
-                    <option value="lightgreen">Light Green</option>
-                    <option value="lightcoral">Light Coral</option>
+                <select id="bgColor">
+                    <option value="#ffcccb">Light Red</option>
+                    <option value="#ffeb3b">Light Yellow</option>
+                    <option value="#a5d6a7">Light Green</option>
+                    <option value="#64b5f6">Light Blue</option>
+                    <option value="#ffffff">White</option>
+                    <option value="#000000">Black</option>
                 </select>
             </div>
-            <div class="font-size-container">
+
+            <div class="control-item">
                 <label for="fontSize">Font Size:</label>
-                <input type="range" id="fontSize" min="12" max="32" value="16" onchange="changeFontSize(this.value)">
+                <input type="range" id="fontSize" min="10" max="30" value="16" step="1">
                 <span id="fontSizeValue">16px</span>
             </div>
-            <div class="font-style-container">
+
+            <div class="control-item">
                 <label for="fontStyle">Font Style:</label>
-                <select id="fontStyle" onchange="changeFontStyle()">
-                    <option value="sans-serif">Sans Serif</option>
-                    <option value="serif">Serif</option>
+                <select id="fontStyle">
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="'Georgia', serif">Georgia</option>
+                    <option value="'Arial', sans-serif">Arial</option>
+                    <option value="'Verdana', sans-serif">Verdana</option>
                 </select>
             </div>
-            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+            <button id="toggleDarkMode">Toggle Dark Mode</button>
         </div>
 
-        <ul id="taskList"></ul>
+        <div class="todo-container">
+            <h2>My To-Do List</h2> <!-- Mengubah teks di sini -->
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button id="addTaskBtn">Add Task</button> <!-- Tombol ini akan diubah -->
+            <ul id="taskList"></ul>
+        </div>
     </div>
+
     <script src="script.js"></script>
 
 </body>

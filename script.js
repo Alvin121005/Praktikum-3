@@ -1,108 +1,72 @@
-let fontSize = 16;
+document.getElementById("bgColor").addEventListener("change", function () {
+  document.body.style.backgroundColor = this.value; 
+});
 
-function addTask() {
-    const taskInput = document.getElementById("newTask");
-    const taskText = taskInput.value.trim();
+const fontSizeInput = document.getElementById("fontSize");
+const fontSizeValue = document.getElementById("fontSizeValue");
 
-    if (taskText.length > 30) {
-        alert("Hanya bisa mengisi maksimal 30 karakter!");
-        return;
-    }
+fontSizeInput.addEventListener("input", function () {
+  document.body.style.fontSize = this.value + "px"; 
+  fontSizeValue.textContent = this.value + "px"; 
+});
 
-    if (taskText) {
-        const li = document.createElement("li");
-        li.textContent = taskText;
+document
+  .getElementById("toggleDarkMode")
+  .addEventListener("click", function () {
+      document.body.classList.toggle("dark-theme"); 
+  });
 
-        const closeBtn = document.createElement("span");
-        closeBtn.textContent = " X";
-        closeBtn.className = "close";
-        closeBtn.onclick = function() {
-            deleteTask(this.parentElement);
-        };
-        
-        const editBtn = document.createElement("span");
-        editBtn.textContent = "✎";
-        editBtn.className = "edit";
-        editBtn.onclick = function() {
-            editTask(this.parentElement);
-        };
+document.getElementById("fontStyle").addEventListener("change", function () {
+  document.body.style.fontFamily = this.value; 
+});
 
-        li.appendChild(editBtn);
-        li.appendChild(closeBtn);
-        
-        li.ondblclick = function() {
-            editTask(this);
-        };
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
 
-        document.getElementById("taskList").appendChild(li);
-        taskInput.value = "";
-    }
-}
+addTaskBtn.addEventListener("click", function () {
+  const taskValue = taskInput.value.trim(); 
 
-function deleteTask(element) {
-    element.remove();
-}
+  if (taskValue.length > 0 && taskValue.length <= 30) {
+      const li = document.createElement("li");
 
-function editTask(element) {
-    const currentText = element.childNodes[0].textContent.trim();
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = currentText;
+      const taskText = document.createTextNode(taskValue);
+      li.appendChild(taskText);
 
-    input.onkeypress = function(event) {
-        if (event.key === "Enter") {
-            if (input.value.length > 30) {
-                alert("Hanya bisa mengisi maksimal 30 karakter!");
-                return;
-            }
-            const updatedText = input.value.trim();
-            if (updatedText) {
-                element.childNodes[0].textContent = updatedText; // Update text
-            }
-            // Remove the input and re-add edit and close buttons
-            element.innerHTML = ""; 
-            const editBtn = document.createElement("span");
-            editBtn.textContent = "✎";
-            editBtn.className = "edit";
-            editBtn.onclick = function() {
-                editTask(this.parentElement);
-            };
-            const closeBtn = document.createElement("span");
-            closeBtn.textContent = " X";
-            closeBtn.className = "close";
-            closeBtn.onclick = function() {
-                deleteTask(this.parentElement);
-            };
-            element.appendChild(document.createTextNode(updatedText));
-            element.appendChild(editBtn);
-            element.appendChild(closeBtn);
-        }
-    };
+      const renameBtn = document.createElement("button");
+      renameBtn.textContent = "Rename";
+      renameBtn.style.marginLeft = "10px";
 
-    element.innerHTML = ""; 
-    element.appendChild(input);
-    input.focus(); 
-}
+      renameBtn.addEventListener("click", function () {
+          const newTask = prompt("Edit your task:", li.firstChild.textContent);
+          if (newTask && newTask.length <= 30) {
+              li.firstChild.textContent = newTask;
+          }
+      });
 
-function changeBackgroundColor() {
-    const bgColor = document.getElementById("bgColor").value;
-    document.body.style.backgroundColor = bgColor;
-}
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "X";
+      deleteBtn.style.color = "red";
+      deleteBtn.style.marginLeft = "10px";
 
-function changeFontSize(size) {
-    const body = document.body;
-    fontSize = size;
-    body.style.fontSize = fontSize + 'px';
-    document.getElementById("fontSizeValue").textContent = fontSize + 'px';
-    const container = document.querySelector('.container');
-    container.style.fontSize = fontSize + 'px';
-}
+      deleteBtn.addEventListener("click", function () {
+          taskList.removeChild(li); 
+      });
 
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
-}
+      li.appendChild(renameBtn);
+      li.appendChild(deleteBtn);
 
-function changeFontStyle() {
-    const fontStyle = document.getElementById("fontStyle").value;
-    document.body.style.fontFamily = fontStyle;
-}
+      li.addEventListener("dblclick", function () {
+          const newTask = prompt("Edit your task:", li.firstChild.textContent);
+          if (newTask && newTask.length <= 30) {
+              li.firstChild.textContent = newTask;
+          }
+      });
+
+      taskList.appendChild(li); 
+      taskInput.value = ""; 
+  } else {
+      alert("Tugas harus antara 1 hingga 30 karakter."); 
+      taskInput.value = ""; 
+  }
+});
